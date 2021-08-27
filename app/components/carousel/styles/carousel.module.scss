@@ -1,0 +1,16 @@
+.carousel {
+  display: flex;
+  flex-direction: row;
+
+  .wrapper:first-child {
+    margin-right: 7px;
+  }
+
+  .wrapper:last-child {
+    margin-left: 7px;
+  }
+
+  .wrapper {
+    margin: 0 7px;
+  }
+}
