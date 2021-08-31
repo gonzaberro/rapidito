@@ -1,16 +1,16 @@
 import Head from 'next/head';
 
-import Card from '../app/components/card';
-import Carousel from '../app/components/carousel/carousel';
+import Carousel from '../app/components/carousel';
 import Footer from '../app/components/footer';
 import Layout from '../app/components/layout';
 import Main from '../app/components/main';
-import Navbar from '../app/components/navbar';
+import Header from '../app/components/header';
+import List from '../app/components/list';
 
 import { loremTemplate } from '../app/utils/strings';
 
-export default function Home({ cards }) {
-  const renderCards = cards.map((card, index) => (<Card key={index} {...card} />));
+export default function Home({ carouselData, listData }) {
+  const { length } = listData;
 
   return (
     <Layout>
@@ -19,26 +19,35 @@ export default function Home({ cards }) {
         <meta name="description" content="Rapidito web app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      <Header />
 
-      <Main>
-        <Carousel>
-          {renderCards}
-        </Carousel>
-      </Main>
-
+      <Main
+        center={(
+          <>
+            <Carousel
+              data={carouselData}
+            />
+            <List
+              data={listData}
+              title={`${length} restaurantes`}
+            />
+          </>
+        )}
+      />
       <Footer />
     </Layout>
   );
-};
+}
 
-// export async function getServerSideProps() {
 export async function getStaticProps() {
-  const cards = [];
+// export async function getServerSideProps() {
+  const carouselData = [];
+  const listData = [];
+
   const loremWordTemplate = (length) => loremTemplate('word', length);
 
-  for (let i = 1; i <= 5; i++) {
-    const title = await fetch(loremWordTemplate(2))
+  for (let i = 1; i <= 7; i++) {
+    const title = await fetch(loremWordTemplate(2));
     const { text: titleText } = await title.json();
     const description = await fetch(loremWordTemplate(10))
     const { text: descText } = await description.json();
@@ -46,16 +55,34 @@ export async function getStaticProps() {
     const card = {
       title: titleText,
       description: descText,
-      src: `https://picsum.photos/id/${i * 20}/220/270`,
-      price: 100 * i
+      src: `https://picsum.photos/id/${i * 20}/215`,
+      price: 100 * i,
 
-    }
-    cards.push(card);
+    };
+    carouselData.push(card);
+  }
+
+  for (let i = 1; i <= 10; i++) {
+    const title = await fetch(loremWordTemplate(2));
+    const { text: titleText } = await title.json();
+    const description = await fetch(loremWordTemplate(10))
+    const { text: descText } = await description.json();
+
+    const item = {
+      title: titleText,
+      description: descText,
+      src: `https://picsum.photos/id/${i * 20}/100`,
+      score: i,
+      type: i < 4 ? 'Patrocinado' : null,
+      payment: i < 7 ? 'Acepta pago online' : null,
+    };
+    listData.push(item);
   }
 
   return {
     props: {
-      cards: cards
-    }
-  }
-};
+      carouselData,
+      listData,
+    },
+  };
+}

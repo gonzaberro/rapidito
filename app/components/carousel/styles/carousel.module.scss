@@ -1,16 +1,21 @@
-.carousel {
-  display: flex;
-  flex-direction: row;
+.container {
+  position: relative;
 
-  .wrapper:first-child {
-    margin-right: 7px;
-  }
+  .carousel {
+    display: flex;
+    overflow-x: hidden;
+    max-width: calc(215px*5);
 
-  .wrapper:last-child {
-    margin-left: 7px;
-  }
+    .wrapper:first-child {
+      margin-right: 7px;
+    }
 
-  .wrapper {
-    margin: 0 7px;
-  }
+    .wrapper:last-child {
+      margin-left: 7px;
+    }
+
+    .wrapper {
+      margin: 0 7px;
+    }
+  } 
 }

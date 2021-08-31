@@ -1,0 +1,62 @@
+.item {
+  display: flex;
+  background-color: var(--white);
+  border-radius: 5px;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  padding: 7px;
+
+  &:hover{
+    box-shadow: var(--shadow-lg);
+    transition-property: box-shadow;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: var(--duration-300);
+  }
+
+  .imageContainer {
+    padding-right: 12px;
+    border-right: var(--border);
+
+    .image {
+      border-radius: 5px;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 12px;
+
+    .type {
+      text-transform: uppercase;
+      font-size: var(--font-smallest);
+      color: var(--dark-gray);
+      margin-bottom: -5px;
+    }
+
+    .title {
+      font-size: var(--font-big);
+      font-weight: 500;
+    }
+
+    .paymentContainer {
+      display: flex;
+      align-items: center;
+
+      .payment {
+        padding-left: 5px;
+        font-size: var(--font-smaller);
+      }
+    }
+
+    .description {
+      font-size: var(--font-small);
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+
+  .badgeContainer {
+    margin-left: auto;
+  }
+}

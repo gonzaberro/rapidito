@@ -1,0 +1,18 @@
+.button {
+  background-color: var(--white);
+  border-radius: 9999px;
+  z-index: 9999;
+  position: absolute;
+  top: 50%;
+  user-select: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
+
+.left {
+  left: -15px;
+}
+
+.right {
+  right: -15px;
+}

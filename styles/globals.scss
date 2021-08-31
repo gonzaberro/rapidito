@@ -1,15 +1,22 @@
 :root {
   // color
+  --dark-gray: #858585;
   --gray: #bbbbbb;
   --light-gray: #eaeaea;
   --white: #ffffff;
 
+  --yellow: #ffec00;
+  --orange: #ffbf00;
+  --red: #ff2825;
+
   // font sizes
-  --font-little: 0.85em;
+  --font-smallest: 0.65em;
+  --font-smaller: 0.75em;
+  --font-small: 0.85em;
   --font-normal: 1em;
   --font-big: 1.15em;
 
-  // shadow
+  // card shadow
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 

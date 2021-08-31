@@ -1,5 +1,8 @@
-.navbar {
-  height: 40px;
+.header {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  height: 65px;
   width: 100%;
   display: flex;
   justify-content: center;

@@ -1,14 +1,25 @@
 import { node } from 'prop-types';
 import styles from './styles/main.module.scss';
 
-const Main = ({ children }) => (
+const Main = ({ center, left, right }) => (
   <main className={styles.main}>
-    {children}
+    <div className={styles.grid}>
+      {left && <div>{left}</div>}
+      <div className={styles.center}>{center}</div>
+      {right && <div>{right}</div>}
+    </div>
   </main>
 );
 
 Main.propTypes = {
-  children: node.isRequired,
+  center: node.isRequired,
+  left: node,
+  right: node,
+};
+
+Main.defaultProps = {
+  left: null,
+  right: null,
 };
 
 export default Main;
