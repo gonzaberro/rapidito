@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link'
 
 import Carousel from '../app/components/carousel';
 import Footer from '../app/components/footer';
@@ -22,6 +23,15 @@ export default function Home({ carouselData, listData }) {
       <Header />
 
       <Main
+        left={(
+          <ul>
+            <li>
+              <Link href="/menu">
+                <a>Menu</a>
+              </Link>
+            </li>
+          </ul>
+        )}
         center={(
           <>
             <Carousel
