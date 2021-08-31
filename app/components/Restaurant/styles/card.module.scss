@@ -1,0 +1,40 @@
+.card {
+  border-radius: 5px;
+  box-shadow: var(--shadow-md);
+  background-color: var(--white);
+  cursor: pointer;
+  max-width: 250px;
+  height: 17rem;
+  margin:1rem;
+  &:hover{
+    box-shadow: var(--shadow-lg);
+    transition-property: box-shadow;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: var(--duration-300);
+  }
+
+  .image {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .price {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .title {
+    font-weight: 500;
+  }
+
+  .description {
+    display: block;
+    font-size: var(--font-little);
+    color: var(--gray);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .cardInfo{
+    padding: 0.8rem;
+  }
+}

@@ -1,7 +1,6 @@
 import Head from 'next/head';
 
-import Card from '../app/components/card';
-import Carousel from '../app/components/carousel/carousel';
+import RestaurantMenu from '../app/components/Restaurant/RestaurantMenu';
 import Footer from '../app/components/footer';
 import Layout from '../app/components/layout';
 import Main from '../app/components/main';
@@ -9,8 +8,7 @@ import Navbar from '../app/components/navbar';
 
 import { loremTemplate } from '../app/utils/strings';
 
-export default function Home({ cards }) {
-  const renderCards = cards.map((card, index) => (<Card key={index} {...card} />));
+export default function Home() {
 
   return (
     <Layout>
@@ -22,9 +20,7 @@ export default function Home({ cards }) {
       <Navbar />
 
       <Main>
-        <Carousel>
-          {renderCards}
-        </Carousel>
+        <RestaurantMenu />
       </Main>
 
       <Footer />
