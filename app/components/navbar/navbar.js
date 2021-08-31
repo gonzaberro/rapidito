@@ -1,8 +1,10 @@
+import Image from 'next/image';
 import styles from './styles/navbar.module.scss';
+import logoImg from '../../../public/logo.svg';
 
 const Navbar = () => (
   <nav className={styles.navbar}>
-    <p>Navbar</p>
+    <Image src={logoImg} alt="Pedidos Rapiditos" />
   </nav>
 );
 
