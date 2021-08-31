@@ -4,8 +4,14 @@
   top: 0;
   height: 65px;
   width: 100%;
+  padding: 10px;
+  padding-left: 15px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   background-color: var(--white);
+}
+
+.logoImg {
+  margin: 10px;
 }

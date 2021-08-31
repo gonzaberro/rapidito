@@ -1,0 +1,12 @@
+.imageContainer {
+  width: 100%;
+	flex-wrap: wrap;
+	background-image: url('../public/landingImg.jpeg');
+}
+
+.main {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  //padding-top: 75px;
+}
