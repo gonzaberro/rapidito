@@ -1,17 +1,18 @@
+import { useRouter } from 'next/router';
 import Head from 'next/head';
-
-import Card from '../app/components/card';
-import Carousel from '../app/components/carousel/carousel';
+import SearchBox from '../app/components/searchBox';
 import Footer from '../app/components/footer';
 import Layout from '../app/components/layout';
 import Main from '../app/components/main';
 import Navbar from '../app/components/navbar';
+import styles from './index.module.scss';
 
 import { loremTemplate } from '../app/utils/strings';
 
-export default function Home({ cards }) {
-  const renderCards = cards.map((card, index) => (<Card key={index} {...card} />));
 
+export default function Home() {
+  const router = useRouter();
+  const searchOnPress = (text) => router.push(`/restaurantes?ciudad=${text}`);
   return (
     <Layout>
       <Head>
@@ -20,13 +21,11 @@ export default function Home({ cards }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-
       <Main>
-        <Carousel>
-          {renderCards}
-        </Carousel>
+        <div className={styles.imageContainer}>
+          <SearchBox searchOnPress={searchOnPress} />
+        </div>
       </Main>
-
       <Footer />
     </Layout>
   );
