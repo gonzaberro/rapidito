@@ -87,25 +87,25 @@ export default function RestaurantMenu() {
 					</div>
 					<div className={styles.menuContainer}>
 						<MenuCard
-							title="La Nanu Burger"
+							title="Hamburguesa"
 							description="La mejor de todas"
 							src={burger1}
 							price="100"
 						/>
 						<MenuCard
-							title="La Nanu Burger"
+							title="Hamburguesa"
 							description="La mejor de todas"
 							src={burger2}
 							price="100"
 						/>
 						<MenuCard
-							title="La Nanu Burger"
+							title="Hamburguesa"
 							description="La mejor de todas"
 							src={burger3}
 							price="100"
 						/>
 						<MenuCard
-							title="La Nanu Burger"
+							title="Hamburguesa"
 							description="La mejor de todas"
 							src={burger4}
 							price="100"
@@ -117,25 +117,25 @@ export default function RestaurantMenu() {
 					</div>
 					<div className={styles.menuContainer}>
 						<MenuCard
-							title="La Nanu Burger"
+							title="Hamburguesa"
 							description="La mejor de todas"
 							src={burger1}
 							price="100"
 						/>
 						<MenuCard
-							title="La Nanu Burger"
+							title="Hamburguesa"
 							description="La mejor de todas"
 							src={burger2}
 							price="100"
 						/>
 						<MenuCard
-							title="La Nanu Burger"
+							title="Hamburguesa"
 							description="La mejor de todas"
 							src={burger3}
 							price="100"
 						/>
 						<MenuCard
-							title="La Nanu Burger"
+							title="Hamburguesa"
 							description="La mejor de todas"
 							src={burger4}
 							price="100"
