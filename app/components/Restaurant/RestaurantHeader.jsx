@@ -14,13 +14,7 @@ export default function RestaurantHeader() {
 					className={styles.productSearch}
 				/>
 			</div>
-			<Image
-				src={imagen}
-				alt="Banner"
-				className={styles.bannerImage}
-				layout="responsive"
-				height="70"
-			/>
+			<div className={styles.bannerImage}></div>
 		</div>
 	);
 }

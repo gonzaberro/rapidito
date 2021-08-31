@@ -107,10 +107,13 @@
   background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(75,75,75,0.6278886554621849) 0%, rgba(54,54,54,0.7847514005602241) 47%, rgba(92,92,92,0.7903536414565826) 85%);
 }
 .bannerImage {
-  width: 1000px;
-  position: absolute;
+  width: 100%;
   top: 0;
   left: 0;
+  height: 21.9rem;
+  background-image: url("../bannerFood.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   }
   .productSearch{
     width: 30%;
