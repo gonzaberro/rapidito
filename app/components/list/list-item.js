@@ -1,14 +1,17 @@
-import { number, string } from 'prop-types';
+import { func, number, string } from 'prop-types';
 import Image from 'next/image';
 import styles from './styles/list-item.module.scss';
 
 import CreditCard from '../../icons/credit-card';
 import Badge from '../badge';
 
-const ListItem = ({ description, payment, score, src, title, type }) => (
-  <div className={styles.item}>
+// TODO: remove from src
+import foodImage from '../../../assets/food_image.jpeg';
+
+const ListItem = ({ description, onClick, payment, score, src, title, type }) => (
+  <div className={styles.item} onClick={onClick}>
     <div className={styles.imageContainer}>
-      <Image src={src} alt="Picture" width={100} height={100} className={styles.image} />
+      <Image src={foodImage} alt="Picture" width={100} height={100} className={styles.image} />
     </div>
     <div className={styles.content}>
       {type && <div className={styles.type}>{type}</div>}
@@ -29,6 +32,7 @@ const ListItem = ({ description, payment, score, src, title, type }) => (
 
 ListItem.propTypes = {
   description: string,
+  onClick: func,
   payment: string,
   score: number,
   src: string,
@@ -37,6 +41,7 @@ ListItem.propTypes = {
 };
 
 ListItem.defaultProps = {
+  onClick: null,
   payment: null,
   score: null,
   type: null,
