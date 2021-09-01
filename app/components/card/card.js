@@ -1,17 +1,12 @@
-/* import { number, string } from 'prop-types';
-import Image from 'next/image';
+import { node } from 'prop-types';
 import styles from './styles/card.module.scss';
 
- const Card = ({ }) => (
-
+const Card = ({ children }) => (
+  <div className={styles.card}>{children}</div>
 );
 
 Card.propTypes = {
-
+  children: node.isRequired,
 };
 
-Card.defaultProps = {
-
-};
-
-export default Card; */
+export default Card;

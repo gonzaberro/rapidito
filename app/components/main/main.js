@@ -4,9 +4,9 @@ import styles from './styles/main.module.scss';
 const Main = ({ center, left, right }) => (
   <main className={styles.main}>
     <div className={styles.grid}>
-      {left && <div>{left}</div>}
+      {left && <div className={styles.left}>{left}</div>}
       <div className={styles.center}>{center}</div>
-      {right && <div>{right}</div>}
+      {right && <div className={styles.right}>{right}</div>}
     </div>
   </main>
 );
