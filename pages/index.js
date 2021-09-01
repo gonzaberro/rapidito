@@ -3,7 +3,6 @@ import Head from 'next/head';
 import SearchBox from '../app/components/searchBox';
 import Footer from '../app/components/footer';
 import Layout from '../app/components/layout';
-import Main from '../app/components/main';
 import Header from '../app/components/header';
 import styles from './index.module.scss';
 
