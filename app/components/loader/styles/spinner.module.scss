@@ -1,0 +1,47 @@
+.spinnerContainer{
+    width: 7rem;
+    height: 7rem;
+    background-color: white;
+    position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  	border-radius: 10px;
+	margin: auto;
+    box-shadow: rgb(220 212 209 / 80%) 0px 8px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinnerText{
+    flex:1;
+    color:red;
+    font-size: 90px;
+    text-align: center;
+    font-style: italic;
+    animation: myAnimation 1.2s infinite;
+    animation-fill-mode: forwards;
+}
+
+@keyframes myAnimation{
+    0%{
+      opacity: 1;
+    }
+    20%{
+        opacity: 0.5;
+      }
+    60%{
+      opacity: 0;
+    }
+    80%{
+     
+        opacity: 0,5;
+      }
+    100%{
+     
+      opacity: 1;
+    }
+    
+  }

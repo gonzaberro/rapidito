@@ -1,6 +1,6 @@
 import styles from "./styles/restaurant.module.scss";
 
-export default function SidesContainer() {
+export default function LeftSidesContainer() {
 	return (
 		<>
 			<div

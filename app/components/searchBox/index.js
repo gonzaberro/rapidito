@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './searchBox.module.scss';
 
 const SearchBox = ({ searchOnPress }) => {
-  const [text, setText] = useState('Ingrese dirección');
+  const [text, setText] = useState('Ingrese su dirección');
   const onPress = () => {
     searchOnPress(text);
   };

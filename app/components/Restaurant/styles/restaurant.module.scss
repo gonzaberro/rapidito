@@ -70,6 +70,18 @@
    color:#198615
 
 }
+.closeTag{
+  color: #e23737;
+  border-radius: 5px 5px 5px 5px;
+  height: 3rem;
+  width: 8.5rem;
+  font-size: 0.8rem;
+  padding: 0.2rem;
+  font-weight: bold;
+   text-transform: uppercase; 
+   background-color:#ef9488
+}
+
 .realPhotoText{
   margin-left: 0.5rem;
 }
@@ -81,11 +93,11 @@
   margin-right: 0.5rem;
 }
 .menuContainer{
-  padding-left: 4rem;
-  padding-right: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   display: flex; 
-  justify-content: space-between;
-  flex:1
+  flex:1;
+  flex-wrap: wrap;
 }
 
 .mainContainer{

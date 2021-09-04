@@ -1,0 +1,3 @@
+export const MENU_TYPES = {
+    RESTAURANT_MENU_DATA : "RESTAURANT_MENU_DATA"
+}

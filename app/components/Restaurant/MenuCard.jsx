@@ -14,7 +14,7 @@ const MenuCard = ({ src, title, description, price }) => (
 		/>
 		<div className={styles.cardInfo}>
 			<span className={styles.title}>{title}</span>
-			{description && <span className={styles.description}>{description}</span>}
+			<span className={styles.description}>{description}</span>
 			<span className={styles.price}>{`$${price}`}</span>
 		</div>
 	</div>

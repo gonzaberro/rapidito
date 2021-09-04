@@ -1,13 +1,75 @@
 import burger1 from "./burger.jpg"; // Tell webpack this JS file uses this image
-import burger2 from "./burger2.jpeg"; // Tell webpack this JS file uses this image
-import burger3 from "./burger3.jpeg"; // Tell webpack this JS file uses this image
-import burger4 from "./burger4.jpg"; // Tell webpack this JS file uses this image
 import styles from "./styles/restaurant.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import MenuCard from "./MenuCard";
+import { useSelector } from "react-redux";
 
 export default function RestaurantMainContainer() {
+
+	const topProducts = useSelector(state => state.restaurantMenu.topProducts);
+	const menuProducts = useSelector(state => state.restaurantMenu.menuProducts);
+	
+	const RenderRestaurantMenu = () => {
+		
+		let menuProduct = [];
+
+		for (const [key, value] of Object.entries(menuProducts)) {
+
+			menuProduct = [...menuProduct, 
+					<>
+							<div className={styles.recomendedMenu}>
+											<h3 className={styles.recommendedMenuTitle}>{key}</h3>
+							</div>
+							<div className={styles.menuContainer}>
+								{value.map((product) => {
+										return <MenuCard
+													title={product.nombre}
+													description={product.description || "Hamburguesa doble con 2 medallones de 120g, bacon crocante, doble cheddar, pan de papa, tomate y lechuga"}
+													src={burger1}
+													price={product.precio}
+												/>
+								})
+								}
+								{value.map((product) => {
+										return <MenuCard
+													title={product.nombre}
+													description={product.description || "Hamburguesa doble con 2 medallones de 120g, bacon crocante, doble cheddar, pan de papa, tomate y lechuga"}
+													src={burger1}
+													price={product.precio}
+												/>
+								})
+								}
+								{value.map((product) => {
+										return <MenuCard
+													title={product.nombre}
+													description={product.description || "Hamburguesa doble con 2 medallones de 120g, bacon crocante, doble cheddar, pan de papa, tomate y lechuga"}
+													src={burger1}
+													price={product.precio}
+												/>
+								})
+								}
+								{value.map((product) => {
+										return <MenuCard
+													title={product.nombre}
+													description={product.description || "Hamburguesa doble con 2 medallones de 120g, bacon crocante, doble cheddar, pan de papa, tomate y lechuga"}
+													src={burger1}
+													price={product.precio}
+												/>
+								})
+								}
+							</div>
+					</>
+				]
+
+		
+		}
+
+		return menuProduct;
+		
+	}
+	
+	
 	return (
 		<>
 			<div>
@@ -23,61 +85,20 @@ export default function RestaurantMainContainer() {
 					</span>
 				</div>
 				<div className={styles.menuContainer}>
-					<MenuCard
-						title="Hamburguesa"
-						description="La mejor de todas"
-						src={burger1}
-						price="100"
-					/>
-					<MenuCard
-						title="Hamburguesa"
-						description="La mejor de todas"
-						src={burger2}
-						price="100"
-					/>
-					<MenuCard
-						title="Hamburguesa"
-						description="La mejor de todas"
-						src={burger3}
-						price="100"
-					/>
-					<MenuCard
-						title="Hamburguesa"
-						description="La mejor de todas"
-						src={burger4}
-						price="100"
-					/>
+					{
+						topProducts.map(( product ) => {
+							return <MenuCard
+								title={product.nombre}
+								description={product.description || "Hamburguesa doble con 2 medallones de 120g, bacon crocante, doble cheddar, pan de papa, tomate y lechuga"}
+								src={burger1}
+								price={product.precio}
+							/>
+						})
+					}
+					
 				</div>
-
-				<div className={styles.recomendedMenu}>
-					<h3 className={styles.recommendedMenuTitle}>Hamgurguesas</h3>
-				</div>
-				<div className={styles.menuContainer}>
-					<MenuCard
-						title="Hamburguesa"
-						description="La mejor de todas"
-						src={burger1}
-						price="100"
-					/>
-					<MenuCard
-						title="Hamburguesa"
-						description="La mejor de todas"
-						src={burger2}
-						price="100"
-					/>
-					<MenuCard
-						title="Hamburguesa"
-						description="La mejor de todas"
-						src={burger3}
-						price="100"
-					/>
-					<MenuCard
-						title="Hamburguesa"
-						description="La mejor de todas"
-						src={burger4}
-						price="100"
-					/>
-				</div>
+				{<RenderRestaurantMenu/>}
+				
 			</div>
 		</>
 	);
