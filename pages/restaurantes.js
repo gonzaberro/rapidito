@@ -91,7 +91,7 @@ const categoryFilter = {
 };
 
 export async function getServerSideProps(context) {
-  // const { query: { ciudad } } = context;
+  const { query: { ciudad } } = context;
 
   const carouselData = [];
   const restaurantListData = [];
@@ -99,7 +99,7 @@ export async function getServerSideProps(context) {
   const rightFilters = [paymentFilter, categoryFilter];
 
   // TODO: get default by city?
-  const { data } = await apiCalls.getRestaurants('resto');
+  const { data } = await apiCalls.getRestaurants(ciudad);
 
   data.forEach((restaurant) => {
     const { nombre, descripcion, calificacion_general, logo } = restaurant;
@@ -109,8 +109,8 @@ export async function getServerSideProps(context) {
       description: descripcion,
       src: logo,
       score: calificacion_general,
-      // type: 'Patrocinado',
-      // payment: 'Acepta pago online',
+      type: 'Patrocinado',
+      payment: 'Acepta pago en efectivo',
     };
 
     restaurantListData.push(item);

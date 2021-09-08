@@ -6,7 +6,7 @@ function getRestaurantMenu(restaurantId) {
 }
 
 function getRestaurants(name) {
-  return apiPython.get(`get_restaurantes_filtered?=${name}`);
+  return apiPython.get(`get_restaurantes_filtered?nombre=${name}`);
 }
 
 export const apiCalls = {
