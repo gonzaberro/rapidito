@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import Head from 'next/head';
 import Footer from '../app/components/footer';
 import Layout from '../app/components/layout';
@@ -19,6 +19,7 @@ export default function Menu() {
 
   const dispatch = useDispatch();
   const [restaurantId, setRestaurantId] = useState(1);
+  const [searchProduct, setSearchProduct] = useState("")
   const restaurantInfo = useSelector(
 		
 		state => state.restaurantMenu.restaurantInfo
@@ -27,11 +28,12 @@ export default function Menu() {
 
   useEffect(()=>{
         apiCalls
-          .getRestaurantMenu(1)
+          .getRestaurantMenu(5)
           .then((response) => {
             dispatch(setRestaurantMenu(response.data));
           })
   },[restaurantId])
+
 
   return (
     <Layout>
@@ -42,9 +44,9 @@ export default function Menu() {
       </Head>
       <Header />
       <Loader loading={!restaurantInfo?.nombre}>
-          <RestaurantHeader />
+          <RestaurantHeader searchProduct={searchProduct} setSearchProduct={setSearchProduct}/>
           <RestaurantOpinionsBar />
-          <Main left={<LeftSidesContainer  />} right={<RightSidesContainer  />} center={<RestaurantMainContainer />} />
+          <Main left={<LeftSidesContainer  />} right={<RightSidesContainer  />} center={<RestaurantMainContainer searchProduct={searchProduct}/>} />
       </Loader>
     	
       <Footer />
