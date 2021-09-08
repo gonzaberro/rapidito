@@ -23,7 +23,7 @@ const List = ({ data, title }) => {
       ))}
     </section>
   );
-}
+};
 
 List.propTypes = {
   // TODO: Add correct data shape

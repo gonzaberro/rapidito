@@ -3,15 +3,18 @@ import Image from 'next/image';
 import styles from './styles/list-item.module.scss';
 
 import CreditCard from '../../icons/credit-card';
+import QuestionMark from '../../icons/question-mark';
 import Badge from '../badge';
-
-// TODO: remove from src
-import foodImage from '../../../assets/food_image.jpeg';
 
 const ListItem = ({ description, onClick, payment, score, src, title, type }) => (
   <div className={styles.item} onClick={onClick}>
     <div className={styles.imageContainer}>
-      <Image src={foodImage} alt="Picture" width={100} height={100} className={styles.image} />
+      {src
+        ? <Image src={src} alt="Picture" width={100} height={100} className={styles.image} unoptimized /> : (
+          <div className={styles.notFound}>
+            <QuestionMark />
+          </div>
+        )}
     </div>
     <div className={styles.content}>
       {type && <div className={styles.type}>{type}</div>}
@@ -22,11 +25,13 @@ const ListItem = ({ description, onClick, payment, score, src, title, type }) =>
           <span className={styles.payment}>{payment}</span>
         </div>
       )}
-      <div className={styles.description}>{description}</div>
+      {description && <div className={styles.description}>{description}</div>}
     </div>
-    <div className={styles.badgeContainer}>
-      <Badge score={score} />
-    </div>
+    {score && (
+      <div className={styles.badgeContainer}>
+        <Badge score={score} />
+      </div>
+    )}
   </div>
 );
 
@@ -41,9 +46,11 @@ ListItem.propTypes = {
 };
 
 ListItem.defaultProps = {
+  description: null,
   onClick: null,
   payment: null,
   score: null,
+  src: null,
   type: null,
 };
 

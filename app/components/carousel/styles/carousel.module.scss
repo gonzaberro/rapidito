@@ -4,7 +4,8 @@
   .carousel {
     display: flex;
     overflow-x: hidden;
-    max-width: calc(215px*5);
+    // 15px * 6 (padding left, center and right) + 260px * 2 (left and right min width)
+    max-width: calc(100vw - 610px);
 
     .wrapper:first-child {
       margin-right: 7px;
