@@ -8,9 +8,9 @@ import ListItem from './list-item';
 const List = ({ data, title }) => {
   const router = useRouter();
 
-  const handleOnClick = (e) => {
+  const handleOnClick = (e,item) => {
     e.preventDefault();
-    router.push('/menu');
+    router.push(`/menu?${item.title}=${item.id}`);
   };
 
   return (
@@ -18,12 +18,12 @@ const List = ({ data, title }) => {
       {title && <h1>{title}</h1>}
       {data && data.map((item, index) => (
         <div key={index} className={styles.wrapper}>
-          <ListItem {...item} onClick={handleOnClick} />
+          <ListItem {...item} onClick={(e) => handleOnClick(e,item)} />
         </div>
       ))}
     </section>
   );
-}
+};
 
 List.propTypes = {
   // TODO: Add correct data shape

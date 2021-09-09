@@ -1,11 +1,12 @@
-import axios from "axios";
+/* eslint-disable import/prefer-default-export */
+import axios from 'axios';
 
 export const apiPython = axios.create({
-  baseURL: "https://pedidosrapiditos.herokuapp.com/api",
+  baseURL: 'https://pedidosrapiditos.herokuapp.com/api',
   timeout: 10000000,
-  responseType: "json",
+  responseType: 'json',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 

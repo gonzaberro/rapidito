@@ -8,11 +8,14 @@ import Layout from '../app/components/layout';
 import List from '../app/components/list';
 import FilterList from '../app/components/filter';
 import Main from '../app/components/main';
+import SearchBar from '../app/components/search-bar';
+
+import { apiCalls } from "../api/apiCalls";
 
 import styles from '../styles/restaurantes.module.scss';
 
-export default function Home({ carouselData, listData, leftFilters, rightFilters }) {
-  const { length } = listData;
+export default function Restaurant({ carouselData, restaurantListData, leftFilters, rightFilters }) {
+  const { length } = restaurantListData;
 
   const renderLeftFilters = (
     leftFilters && leftFilters.map((filters, index) => (<FilterList key={index} {...filters} />))
@@ -35,11 +38,12 @@ export default function Home({ carouselData, listData, leftFilters, rightFilters
         <Main
           center={(
             <>
+              <SearchBar />
               <Carousel
                 data={carouselData}
               />
               <List
-                data={listData}
+                data={restaurantListData}
                 title={`${length} restaurantes`}
               />
             </>
@@ -86,12 +90,31 @@ const categoryFilter = {
   filters: [{ name: 'Categoría 1' }, { name: 'Categoría 2' }, { name: 'Categoría 3' }, { name: 'Categoría 4' }, { name: 'Categoría 5' }, { name: 'Categoría 6' }, { name: 'Categoría 7' }, { name: 'Categoría 8' }, { name: 'Categoría 9' }, { name: 'Categoría 10' }],
 };
 
-export async function getStaticProps() {
-// export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { query: { ciudad } } = context;
+
   const carouselData = [];
-  const listData = [];
+  const restaurantListData = [];
   const leftFilters = [orderFilter, promotionsFilter, moreFilter];
   const rightFilters = [paymentFilter, categoryFilter];
+
+  // TODO: get default by city?
+  const { data } = await apiCalls.getRestaurants(ciudad);
+
+  data.forEach((restaurant) => {
+    const { nombre, descripcion, calificacion_general, logo, id} = restaurant;
+    
+    const item = {
+      id,
+      title: nombre,
+      description: descripcion,
+      src: logo,
+      score: calificacion_general,
+      type: 'Patrocinado',
+      payment: 'Acepta pago en efectivo',
+    };
+    restaurantListData.push(item);
+  });
 
   for (let i = 1; i <= 7; i += 1) {
     const card = {
@@ -104,22 +127,10 @@ export async function getStaticProps() {
     carouselData.push(card);
   }
 
-  for (let i = 1; i <= 10; i += 1) {
-    const item = {
-      title: 'Nombre del restaurante',
-      description: 'Descripción del restaurante',
-      src: '',
-      score: i,
-      type: i < 4 ? 'Patrocinado' : null,
-      payment: i < 7 ? 'Acepta pago online' : null,
-    };
-    listData.push(item);
-  }
-
   return {
     props: {
       carouselData,
-      listData,
+      restaurantListData,
       leftFilters,
       rightFilters,
     },

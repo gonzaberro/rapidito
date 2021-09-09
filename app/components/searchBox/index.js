@@ -9,8 +9,8 @@ const SearchBox = ({ searchOnPress }) => {
   };
   return (
     <div className={styles.wrap}>
-       <p className={styles.titleSearch}>¡Volá con tu delivery online!</p>
-       <p className={styles.subTitleSearch}>Buscá tu restaurant favorito</p>
+      <p className={styles.titleSearch}>¡Volá con tu delivery online!</p>
+      <p className={styles.subTitleSearch}>Buscá tu restaurant favorito</p>
       <div className={styles.search}>
         <input type="text" className={styles.searchInput} placeholder={text} onChange={(e) => setText(e.target.value)} />
         <button type="submit" className={styles.searchButton} onClick={onPress}>

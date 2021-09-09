@@ -15,10 +15,13 @@ import { apiCalls } from "../api/apiCalls";
 import { setRestaurantMenu } from "../redux/actions/restaurantMenuActions";
 import { useDispatch, useSelector} from "react-redux";
 import Loader from "../app/components/loader/Loader"
-export default function Menu() {
+import { useRouter } from 'next/router';
 
+export default function Menu(context) {
+  const router = useRouter();
   const dispatch = useDispatch();
-  const [restaurantId, setRestaurantId] = useState(1);
+
+  const [restaurantId, setRestaurantId] = useState(null);
   const [searchProduct, setSearchProduct] = useState("")
   const restaurantInfo = useSelector(
 		
@@ -27,12 +30,26 @@ export default function Menu() {
 	);
 
   useEffect(()=>{
-        apiCalls
-          .getRestaurantMenu(5)
-          .then((response) => {
-            dispatch(setRestaurantMenu(response.data));
-          })
-  },[restaurantId])
+
+    if(restaurantId !== router.query[Object.keys(router.query)[0]]){
+      setRestaurantId(router.query[Object.keys(router.query)[0]]);
+    }
+  });
+
+  useEffect(()=>{
+
+    if(restaurantId){
+      apiCalls
+      .getRestaurantMenu(restaurantId)
+      .then((response) => {
+        dispatch(setRestaurantMenu(response.data));
+      })
+    }else{
+      dispatch(setRestaurantMenu([]));
+    }  
+  },[restaurantId]);
+
+
 
 
   return (

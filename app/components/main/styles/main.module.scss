@@ -10,8 +10,12 @@
     grid-template-columns: 1fr 3fr 1fr;
 
     .center, .left, .right {
-      padding: 0 20px;
+      padding: 0 15px;
     }
+
+    /* .left .right {
+      min-width: 260px;
+    } */
 
     .center {
       grid-area: center;
@@ -22,10 +26,12 @@
 
     .left {
       grid-area: left;
+      min-width: 260px;
     }
 
     .right {
       grid-area: right;
+      min-width: 260px;
     }
   }
 }
