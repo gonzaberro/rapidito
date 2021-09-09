@@ -102,9 +102,10 @@ export async function getServerSideProps(context) {
   const { data } = await apiCalls.getRestaurants(ciudad);
 
   data.forEach((restaurant) => {
-    const { nombre, descripcion, calificacion_general, logo } = restaurant;
-
+    const { nombre, descripcion, calificacion_general, logo, id} = restaurant;
+    
     const item = {
+      id,
       title: nombre,
       description: descripcion,
       src: logo,
@@ -112,7 +113,6 @@ export async function getServerSideProps(context) {
       type: 'Patrocinado',
       payment: 'Acepta pago en efectivo',
     };
-
     restaurantListData.push(item);
   });
 

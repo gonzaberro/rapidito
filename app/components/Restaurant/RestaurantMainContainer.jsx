@@ -97,33 +97,40 @@ export default function RestaurantMainContainer({searchProduct}) {
 	return (
 		<>
 			<div>
-			{searchProduct==="" &&
-				<>
-					<div className={styles.recomendedMenu}>
-						<h3 className={styles.recommendedMenuTitle}>Platos Recomendados</h3>
-						<span className={styles.realPhotoTag}>
-							<FontAwesomeIcon
-								icon={faCheck}
-								height="15"
-								className={styles.realPhotoCheck}
-							/>
-							Fotos Reales
-						</span>
-					</div>
-					<div className={styles.menuContainer}>
-						{topProducts.map(product => {
-							return (
-								<MenuCard
-									title={product.nombre}
-									description={product.descripcion || ""}
-									src={product.imagen}
-									price={product.precio}
+				{searchProduct === "" && topProducts.length > 0 && (
+					<>
+						<div className={styles.recomendedMenu}>
+							<h3 className={styles.recommendedMenuTitle}>
+								Platos Recomendados
+							</h3>
+							<span className={styles.realPhotoTag}>
+								<FontAwesomeIcon
+									icon={faCheck}
+									height="15"
+									className={styles.realPhotoCheck}
 								/>
-							);
-						})}
-					</div>
-				</>}
-				{<EmptyList list={filteredMenu}><RenderRestaurantMenu /></EmptyList>}
+								Fotos Reales
+							</span>
+						</div>
+						<div className={styles.menuContainer}>
+							{topProducts.map(product => {
+								return (
+									<MenuCard
+										title={product.nombre}
+										description={product.descripcion || ""}
+										src={product.imagen}
+										price={product.precio}
+									/>
+								);
+							})}
+						</div>
+					</>
+				)}
+				{
+					<EmptyList list={filteredMenu}>
+						<RenderRestaurantMenu />
+					</EmptyList>
+				}
 			</div>
 		</>
 	);

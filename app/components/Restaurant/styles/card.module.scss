@@ -3,7 +3,7 @@
   box-shadow: var(--shadow-md);
   background-color: var(--white);
   cursor: pointer;
-  max-width: 250px;
+  max-width: 15rem;
   height: 20rem;
   margin:1rem;
   &:hover{
@@ -23,12 +23,15 @@
     font-weight: 500;
     flex:1;
     flex: 0 0 100%; /* flex-grow, flex-shrink, flex-basis */
+    position: relative;
+    top: 10px;
   }
 
   .title {
     font-weight: 500;
     flex:1;
     flex: 0 0 100%; /* flex-grow, flex-shrink, flex-basis */
+    height: 2.2rem;
   }
 
   .description {
@@ -39,6 +42,20 @@
     padding-bottom: 0.5rem;
     flex:1;
     flex: 0 0 100%; /* flex-grow, flex-shrink, flex-basis */
+      height: 4.5rem;
+      line-height: 20px;
+      word-break: break-all;
+      
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -moz-box-orient: vertical;
+      -ms-box-orient: vertical;
+      box-orient: vertical;
+      -webkit-line-clamp: 3;
+      -moz-line-clamp: 3;
+      -ms-line-clamp: 3;
+      line-clamp: 3;
+      overflow: hidden;
   }
   .cardInfo{
     padding: 0.8rem;
