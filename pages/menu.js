@@ -8,11 +8,10 @@ import RestaurantOpinionsBar from "../app/components/Restaurant/RestaurantOpinio
 import RestaurantMainContainer from "../app/components/Restaurant/RestaurantMainContainer";
 import Main from "../app/components/main/main";
 import LeftSidesContainer from "../app/components/Restaurant/LeftSidesContainer";
-import RightSidesContainer from "../app/components/Restaurant/RightSidesContainer";
-
 import { useEffect } from 'react';
 import { apiCalls } from "../api/apiCalls";
 import { setRestaurantMenu } from "../redux/actions/restaurantMenuActions";
+import {addItemsToShoppingCart} from "../redux/actions/shoppingCartActions";
 import { useDispatch, useSelector} from "react-redux";
 import Loader from "../app/components/loader/Loader"
 import { useRouter } from 'next/router';
@@ -47,6 +46,7 @@ export default function Menu(context) {
       })
     }else{
       dispatch(setRestaurantMenu([]));
+      dispatch(addItemsToShoppingCart([]))
     }  
   },[restaurantId]);
 
