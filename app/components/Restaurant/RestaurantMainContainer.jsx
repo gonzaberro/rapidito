@@ -3,37 +3,69 @@ import styles from "./styles/restaurant.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import MenuCard from "./MenuCard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import EmptyList from "../emptyList/EmptyList";
+import { addItemsToShoppingCart } from "../../../redux/actions/shoppingCartActions";
 
-export default function RestaurantMainContainer({searchProduct}) {
-	
+export default function RestaurantMainContainer({
+	searchProduct,
+	productCategory,
+}) {
+	const dispatch = useDispatch();
 	const topProducts = useSelector(state => state.restaurantMenu.topProducts);
 	const menuProducts = useSelector(state => state.restaurantMenu.menuProducts);
+	const shoppingCartItems = useSelector(state => state.shoppingCart.items);
 	const [filteredMenu, setFilteredMenu] = useState(menuProducts);
-	
 
-	useEffect(()=>{
-		let filteredProducts = {};
+	useEffect(() => {
+		let filteredProducts = menuProducts;
 
-		if(searchProduct !== ""){
-			
+		if (searchProduct !== "") {
 			for (const [key, value] of Object.entries(menuProducts)) {
-			
-				const products = value.filter(product => product?.descripcion.toLowerCase().includes(searchProduct.toLowerCase()) || product?.nombre.toLowerCase().includes(searchProduct.toLowerCase()));
-				
-				if(products.length>0){
-					filteredProducts = {...filteredProducts, [key]:products}
+				const products = value.filter(
+					product =>
+						product?.descripcion
+							.toLowerCase()
+							.includes(searchProduct.toLowerCase()) ||
+						product?.nombre.toLowerCase().includes(searchProduct.toLowerCase())
+				);
+
+				if (products.length > 0) {
+					filteredProducts = { ...filteredProducts, [key]: products };
 				}
 			}
-			
-			setFilteredMenu(filteredProducts);
-		}else{
-			setFilteredMenu(menuProducts);
-		}
-		
 
-	},[searchProduct])
+			
+		} else if(productCategory !== "") {
+			filteredProducts = [];
+			for (const [key, value] of Object.entries(menuProducts)) {
+				if(key === productCategory){
+					filteredProducts = { ...filteredProducts, [key]: value };
+				}
+			}
+		}
+
+
+		setFilteredMenu(filteredProducts);
+	}, [searchProduct,productCategory]);
+
+	const menuActionButton = product => {
+		return (
+			<span
+				onClick={() =>
+					dispatch(
+						addItemsToShoppingCart([
+							...shoppingCartItems,
+							{ cartId: shoppingCartItems.length + 1, ...product },
+						])
+					)
+				}
+				className={styles.menuActionButton}
+			>
+				Agregar al pedido
+			</span>
+		);
+	};
 
 	const RenderRestaurantMenu = () => {
 		let menuProduct = [];
@@ -52,37 +84,8 @@ export default function RestaurantMainContainer({searchProduct}) {
 									title={product.nombre}
 									description={product.descripcion || ""}
 									src={product.imagen}
-									price={product.precio}
-								/>
-							);
-						})}
-						{value.map(product => {
-							return (
-								<MenuCard
-									title={product.nombre}
-									description={product.descripcion || ""}
-									src={product.imagen}
-									price={product.precio}
-								/>
-							);
-						})}
-						{value.map(product => {
-							return (
-								<MenuCard
-									title={product.nombre}
-									description={product.descripcion || ""}
-									src={product.imagen}
-									price={product.precio}
-								/>
-							);
-						})}
-						{value.map(product => {
-							return (
-								<MenuCard
-									title={product.nombre}
-									description={product.descripcion || ""}
-									src={product.imagen}
-									price={product.precio}
+									price={`$${product.precio}`}
+									cardActionButton={menuActionButton(product)}
 								/>
 							);
 						})}
@@ -97,7 +100,7 @@ export default function RestaurantMainContainer({searchProduct}) {
 	return (
 		<>
 			<div>
-				{searchProduct === "" && topProducts.length > 0 && (
+				{searchProduct === "" && productCategory==="" && topProducts.length > 0 && (
 					<>
 						<div className={styles.recomendedMenu}>
 							<h3 className={styles.recommendedMenuTitle}>
@@ -119,7 +122,8 @@ export default function RestaurantMainContainer({searchProduct}) {
 										title={product.nombre}
 										description={product.descripcion || ""}
 										src={product.imagen}
-										price={product.precio}
+										price={`$${product.precio}`}
+										cardActionButton={menuActionButton(product)}
 									/>
 								);
 							})}

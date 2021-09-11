@@ -22,6 +22,7 @@ export default function Menu(context) {
   const dispatch = useDispatch();
 
   const [restaurantId, setRestaurantId] = useState(null);
+  const [productCategory, setProductCategory] = useState("");
   const [searchProduct, setSearchProduct] = useState("")
   const restaurantInfo = useSelector(
 		
@@ -62,10 +63,9 @@ export default function Menu(context) {
       <Header />
       <Loader loading={!restaurantInfo?.nombre}>
           <RestaurantHeader searchProduct={searchProduct} setSearchProduct={setSearchProduct}/>
-          <RestaurantOpinionsBar />
-          <Main left={<LeftSidesContainer  />} right={<RightSidesContainer  />} center={<RestaurantMainContainer searchProduct={searchProduct}/>} />
+         <RestaurantOpinionsBar />
+          <Main left={<LeftSidesContainer  productCategory={productCategory} setProductCategory={setProductCategory}/>} /*right={<RightSidesContainer  />*/ center={<RestaurantMainContainer searchProduct={searchProduct} productCategory={productCategory}/>} />
       </Loader>
-    	
       <Footer />
     </Layout>
   );

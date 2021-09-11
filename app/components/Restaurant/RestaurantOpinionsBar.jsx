@@ -24,7 +24,7 @@ export default function RestaurantOpinionsBar() {
 				<FontAwesomeIcon icon={faStar} height="12" />
 				<b>{restaurantInfo.calificacion_servicio}</b> <br /> Servicio
 			</div>
-			<div className={styles.opinionsButtonContainer}>
+			{/*<div className={styles.opinionsButtonContainer}>
 				<button className={styles.opinionsButton}>
 					200 opiniones{" "}
 					<FontAwesomeIcon
@@ -32,8 +32,8 @@ export default function RestaurantOpinionsBar() {
 						height="15"
 						className={styles.opinionsChevron}
 					/>
-				</button>
-			</div>
+			</button>
+			</div>*/}
 		</section>
 	);
 }

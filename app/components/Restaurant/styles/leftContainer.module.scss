@@ -1,0 +1,26 @@
+.restaurantImage{
+
+}
+.sideContainers{
+    box-shadow: rgb(220 212 209 / 80%) 0px 8px 20px;
+    height: 60%;
+    background: white;
+    margin-top: 3rem;
+    margin-left: 3rem;
+    border-radius: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left;
+    padding: 1.5rem;
+}
+.menuTitle{
+    font-weight: 500;
+}
+.categoryProducts{
+    margin-top: 0.5rem;
+    
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+}
