@@ -1,12 +1,16 @@
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import Card from '../app/components/card';
 import Carousel from '../app/components/carousel';
+import EmptyList from '../app/components/emptyList/EmptyList';
 import Footer from '../app/components/footer';
 import Header from '../app/components/header';
 import Layout from '../app/components/layout';
+import Loader from '../app/components/loader/Loader';
 import List from '../app/components/list';
-import FilterList from '../app/components/filter';
+// import FilterList from '../app/components/filter';
 import Main from '../app/components/main';
 import SearchBar from '../app/components/search-bar';
 
@@ -14,16 +18,44 @@ import { apiCalls } from "../api/apiCalls";
 
 import styles from '../styles/restaurantes.module.scss';
 
-export default function Restaurant({ carouselData, restaurantListData, leftFilters, rightFilters }) {
-  const { length } = restaurantListData;
+const formatRestaurantData = (data) => {
+  return data.map((restaurant) => {
+    const { nombre, descripcion, calificacion_general, logo, id } = restaurant;
+    return {
+      id,
+      title: nombre,
+      description: descripcion,
+      src: logo,
+      score: calificacion_general,
+      type: 'Patrocinado',
+      payment: 'Acepta pago en efectivo',
+    };
+  });
+};
 
-  const renderLeftFilters = (
-    leftFilters && leftFilters.map((filters, index) => (<FilterList key={index} {...filters} />))
-  );
+export default function Restaurant() {
+  const [loading, setLoading] = useState(false);
+  const [restaurantList, setRestaurantList] = useState([]);
+  const [search, setSearch] = useState('');
+  const router = useRouter();
 
-  const renderRightFilters = (
-    rightFilters && rightFilters.map((filters, index) => (<FilterList key={index} {...filters} />))
-  );
+  useEffect(() => {
+    setLoading(true);
+    const { query: { ciudad } } = router;
+    apiCalls.getRestaurants(ciudad).then((response) => {
+      const { data } = response;
+      setRestaurantList(formatRestaurantData(data));
+    }).finally(() => {
+      setLoading(false);
+    });
+  }, [router]);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const filteredRestaurant = search === '' ? restaurantList
+    : restaurantList.filter(({ title = '' }) => title.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <Layout>
@@ -35,87 +67,36 @@ export default function Restaurant({ carouselData, restaurantListData, leftFilte
       <Header />
 
       <div className={styles.container}>
-        <Main
-          center={(
-            <>
-              <SearchBar />
-              <Carousel
-                data={carouselData}
-              />
-              <List
-                data={restaurantListData}
-                title={`${length} restaurantes`}
-              />
-            </>
-          )}
-          left={(
-            <Card>
-              {renderLeftFilters}
-            </Card>
-          )}
-          right={(
-            <Card>
-              {renderRightFilters}
-            </Card>
-          )}
-        />
+        <Loader loading={loading}>
+          <Main
+            left={
+              <Card>
+                Hola Manola
+              </Card>
+            }
+            center={(
+              <>
+                <SearchBar onChange={handleSearch} value={search} />
+                <Carousel
+                // data={carouselData}
+                />
+                <EmptyList list={restaurantList}>
+                  <List
+                    data={filteredRestaurant}
+                    title={`${filteredRestaurant.length} restaurantes`}
+                  />
+                </EmptyList>
+              </>
+            )}
+          />
+        </Loader>
       </div>
       <Footer />
     </Layout>
   );
 }
 
-const orderFilter = {
-  title: 'Ordenar',
-  filters: [{ name: 'Mejor puntuados' }, { name: 'Mejor puntuados' }, { name: 'Menor tiempo de entrega' }],
-};
-
-const moreFilter = {
-  title: 'Más filtros',
-  filters: [{ name: 'Filtro 1' }, { name: 'Filtro 2' }, { name: 'Filtro 3' }, { name: 'Filtro 4' }, { name: 'Filtro 5' }],
-};
-
-const promotionsFilter = {
-  title: 'Promociones',
-  filters: [{ name: 'Promoción 1' }, { name: 'Promoción 2' }, { name: 'Promoción 3' }, { name: 'Promoción 4' },],
-};
-
-const paymentFilter = {
-  title: 'Medios de pago',
-  filters: [{ name: 'Efectivo' }, { name: 'Online' }],
-};
-
-const categoryFilter = {
-  title: 'Categorías',
-  filters: [{ name: 'Categoría 1' }, { name: 'Categoría 2' }, { name: 'Categoría 3' }, { name: 'Categoría 4' }, { name: 'Categoría 5' }, { name: 'Categoría 6' }, { name: 'Categoría 7' }, { name: 'Categoría 8' }, { name: 'Categoría 9' }, { name: 'Categoría 10' }],
-};
-
-export async function getServerSideProps(context) {
-  const { query: { ciudad } } = context;
-
-  const carouselData = [];
-  const restaurantListData = [];
-  const leftFilters = [orderFilter, promotionsFilter, moreFilter];
-  const rightFilters = [paymentFilter, categoryFilter];
-
-  // TODO: get default by city?
-  const { data } = await apiCalls.getRestaurants(ciudad);
-
-  data.forEach((restaurant) => {
-    const { nombre, descripcion, calificacion_general, logo, id} = restaurant;
-    
-    const item = {
-      id,
-      title: nombre,
-      description: descripcion,
-      src: logo,
-      score: calificacion_general,
-      type: 'Patrocinado',
-      payment: 'Acepta pago en efectivo',
-    };
-    restaurantListData.push(item);
-  });
-
+/*
   for (let i = 1; i <= 7; i += 1) {
     const card = {
       title: 'Nombre del plato',
@@ -126,13 +107,4 @@ export async function getServerSideProps(context) {
     };
     carouselData.push(card);
   }
-
-  return {
-    props: {
-      carouselData,
-      restaurantListData,
-      leftFilters,
-      rightFilters,
-    },
-  };
-}
+*/

@@ -16,6 +16,8 @@ import { useDispatch, useSelector} from "react-redux";
 import Loader from "../app/components/loader/Loader"
 import { useRouter } from 'next/router';
 
+import styles from '../styles/menu.module.scss';
+
 export default function Menu(context) {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -64,7 +66,9 @@ export default function Menu(context) {
       <Loader loading={!restaurantInfo?.nombre}>
           <RestaurantHeader searchProduct={searchProduct} setSearchProduct={setSearchProduct}/>
          <RestaurantOpinionsBar />
-          <Main left={<LeftSidesContainer  productCategory={productCategory} setProductCategory={setProductCategory}/>} /*right={<RightSidesContainer  />*/ center={<RestaurantMainContainer searchProduct={searchProduct} productCategory={productCategory}/>} />
+        <div className={styles.container}>
+          <Main left={<LeftSidesContainer  productCategory={productCategory} setProductCategory={setProductCategory}/>} /* right={<RightSidesContainer  />} */ center={<RestaurantMainContainer searchProduct={searchProduct} productCategory={productCategory}/>} />
+        </div>
       </Loader>
       <Footer />
     </Layout>

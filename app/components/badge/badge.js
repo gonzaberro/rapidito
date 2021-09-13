@@ -7,15 +7,15 @@ const TYPE = {
   STAR: 'star',
 };
 
-const Badge = ({ score, type, }) => {
+const Badge = ({ color, score, type }) => {
   let Icon = null;
 
   if (TYPE.STAR === type) {
-    Icon = <Star />;
+    Icon = <Star color={color} />;
   }
 
   return (
-    <div className={styles.badge}>
+    <div className={styles.badge} style={{ color: color}}>
       {Icon}
       {score && <span className={styles.score}>{score}</span>}
     </div>
@@ -23,11 +23,13 @@ const Badge = ({ score, type, }) => {
 };
 
 Badge.propTypes = {
+  color: string,
   score: number,
   type: oneOf(['star']),
 };
 
 Badge.defaultProps = {
+  color: null,
   score: null,
   type: 'star',
 };

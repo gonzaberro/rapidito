@@ -1,7 +1,7 @@
 import { func, string } from 'prop-types';
 import styles from './styles/text-input.module.scss';
 
-const TextInput = ({ onChange, placeholder }) => (
+const TextInput = ({ onChange, placeholder, value }) => (
   <input
     className={styles.textInput}
     onChange={onChange}
@@ -13,11 +13,13 @@ const TextInput = ({ onChange, placeholder }) => (
 TextInput.propTypes = {
   onChange: func,
   placeholder: string,
+  value: string,
 };
 
 TextInput.defaultProps = {
   onChange: null,
   placeholder: '',
+  value: '',
 };
 
 export default TextInput;
