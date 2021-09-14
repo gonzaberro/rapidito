@@ -10,7 +10,7 @@ export function MapContainer({ position }) {
 	return (
 		<Map
 			google={google}
-			zoom={16}
+			zoom={15}
 			style={style}
 			initialCenter={{
 				lat: position.latitud,
