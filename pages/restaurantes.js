@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState} from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -40,14 +40,22 @@ export default function Restaurant() {
   const router = useRouter();
 
   useEffect(() => {
+    const { query: { latitud,longitud } } = router;
+    if(!latitud){
+      
+        return;
+    }
+
     setLoading(true);
-    const { query: { ciudad } } = router;
-    apiCalls.getRestaurants(ciudad).then((response) => {
+  
+    apiCalls.getRestaurants(latitud,longitud).then((response) => {
       const { data } = response;
       setRestaurantList(formatRestaurantData(data));
     }).finally(() => {
       setLoading(false);
     });
+    
+  
   }, [router]);
 
   const handleSearch = (e) => {

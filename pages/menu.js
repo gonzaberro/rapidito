@@ -15,6 +15,7 @@ import {addItemsToShoppingCart} from "../redux/actions/shoppingCartActions";
 import { useDispatch, useSelector} from "react-redux";
 import Loader from "../app/components/loader/Loader"
 import { useRouter } from 'next/router';
+import RightSidesContainer from "../app/components/Restaurant/RightSidesContainer";
 
 import styles from '../styles/menu.module.scss';
 
@@ -22,7 +23,6 @@ export default function Menu(context) {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const [restaurantId, setRestaurantId] = useState(null);
   const [productCategory, setProductCategory] = useState("");
   const [searchProduct, setSearchProduct] = useState("")
   const loading = useSelector(state => state.restaurantMenu.loading);
@@ -33,16 +33,13 @@ export default function Menu(context) {
 	
 	);
 
-  useEffect(()=>{
 
-    if(restaurantId !== router.query[Object.keys(router.query)[0]]){
-      setRestaurantId(router.query[Object.keys(router.query)[0]]);
+  useEffect(()=>{
+    const restaurantId= router.query[Object.keys(router.query)[0]];
+   
+    if(!restaurantId){
+      return;
     }
-  });
-
-  useEffect(()=>{
-
-    if(restaurantId){
       apiCalls
       .getRestaurantMenu(restaurantId)
       .then((response) => {
@@ -50,7 +47,7 @@ export default function Menu(context) {
       }).finally(()=> {
         dispatch(setLoading(false));
       })
-    }
+    
 
     return () => {
       dispatch(setRestaurantMenu([]));
@@ -58,14 +55,9 @@ export default function Menu(context) {
       dispatch(setLoading(true));
     }
       
-    
-     
-      
-  },[restaurantId]);
+  },[router]);
 
 
-
-  debugger;
   return (
     <Layout>
       <Head>
@@ -80,7 +72,7 @@ export default function Menu(context) {
                   <RestaurantHeader searchProduct={searchProduct} setSearchProduct={setSearchProduct}/>
                   <RestaurantOpinionsBar />
                   <div className={styles.container}>
-                    <Main left={<LeftSidesContainer  productCategory={productCategory} setProductCategory={setProductCategory}/>} /* right={<RightSidesContainer  />} */ center={<RestaurantMainContainer searchProduct={searchProduct} productCategory={productCategory}/>} />
+                    <Main left={<LeftSidesContainer  productCategory={productCategory} setProductCategory={setProductCategory}/>}  right={<RightSidesContainer position={{latitud:restaurantInfo.latitud,longitud:restaurantInfo.longitud}} />}  center={<RestaurantMainContainer searchProduct={searchProduct} productCategory={productCategory}/>} />
                   </div>
               </> 
         }

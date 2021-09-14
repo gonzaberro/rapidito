@@ -5,8 +5,8 @@ function getRestaurantMenu(restaurantId) {
   return apiPython.get(`/get_productos_restaurante_categoria?restaurante=${restaurantId}`);
 }
 
-function getRestaurants(name) {
-  return apiPython.get(`get_restaurantes_filtered?nombre=${name}`);
+function getRestaurants(latitud,longitud) {
+  return apiPython.get(`get_restaurantes_filtered?latitud=${latitud}&longitud=${longitud}`);
 }
 
 export const apiCalls = {

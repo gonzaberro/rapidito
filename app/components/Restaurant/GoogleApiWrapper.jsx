@@ -1,6 +1,6 @@
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
-export function MapContainer() {
+export function MapContainer({ position }) {
 	const style = {
 		height: "36%",
 		borderRadius: 10,
@@ -10,11 +10,11 @@ export function MapContainer() {
 	return (
 		<Map
 			google={google}
-			zoom={14}
+			zoom={16}
 			style={style}
 			initialCenter={{
-				lat: -34.792136,
-				lng: -58.382106,
+				lat: position.latitud,
+				lng: position.longitud,
 			}}
 		>
 			<Marker name={"Current location"} />

@@ -10,8 +10,9 @@ import { getPositionFromDirection } from '../app/utils/geoPosition';
 export default function Home() {
   const router = useRouter();
   const searchOnPress = async (text) => {
-    const { latitud, longitud } = await getPositionFromDirection(text);
-    router.push(`/restaurantes?latitud=${latitud}&longitud=${longitud}`);
+    const {lat, lng} = await getPositionFromDirection(text);
+    if(lat && lng)
+    router.push(`/restaurantes?latitud=${lat}&longitud=${lng}`);
   };
   return (
     <Layout>

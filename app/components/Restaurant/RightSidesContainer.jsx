@@ -1,7 +1,7 @@
 import styles from "./styles/restaurant.module.scss";
 import GoogleApiWrapper from "./GoogleApiWrapper";
 
-export default function RightSidesContainer() {
+export default function RightSidesContainer({ position }) {
 	return (
 		<>
 			<div
@@ -16,7 +16,7 @@ export default function RightSidesContainer() {
 					paddingTop: "1rem",
 				}}
 			>
-				<GoogleApiWrapper />
+				<GoogleApiWrapper position={position}  />
 			</div>
 		</>
 	);

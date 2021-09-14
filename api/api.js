@@ -18,3 +18,14 @@ export const apiGeolocation = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export const apiGoogleGeolocation = axios.create({
+  baseURL: "https://maps.googleapis.com/maps/api/geocode/",
+  timeout: 10000000,
+  responseType: "json",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+

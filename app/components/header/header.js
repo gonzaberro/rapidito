@@ -8,7 +8,6 @@ const Header = () => {
 
   const router = useRouter();
 
-  debugger;
   return (<nav className={styles.header}>
     <span  style={{cursor: "pointer"}} ><Image src={logoImg} alt="Pedidos Rapiditos"onClick={()=>router.push("/")}/></span>
     <span className={styles.shoppingContainer}>{router.route=== "/menu" && <ShoppingCart/>}</span>
