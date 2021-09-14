@@ -6,3 +6,11 @@ export const setRestaurantMenu = (data) => dispatch => {
     payload: data
   });
 }
+
+
+export const setLoading = (loading) => dispatch => {
+  dispatch({
+    type: MENU_TYPES.SET_LOADING,
+    payload: loading
+  });
+}

@@ -10,7 +10,7 @@ import Main from "../app/components/main/main";
 import LeftSidesContainer from "../app/components/Restaurant/LeftSidesContainer";
 import { useEffect } from 'react';
 import { apiCalls } from "../api/apiCalls";
-import { setRestaurantMenu } from "../redux/actions/restaurantMenuActions";
+import { setRestaurantMenu, setLoading } from "../redux/actions/restaurantMenuActions";
 import {addItemsToShoppingCart} from "../redux/actions/shoppingCartActions";
 import { useDispatch, useSelector} from "react-redux";
 import Loader from "../app/components/loader/Loader"
@@ -25,6 +25,8 @@ export default function Menu(context) {
   const [restaurantId, setRestaurantId] = useState(null);
   const [productCategory, setProductCategory] = useState("");
   const [searchProduct, setSearchProduct] = useState("")
+  const loading = useSelector(state => state.restaurantMenu.loading);
+
   const restaurantInfo = useSelector(
 		
 		state => state.restaurantMenu.restaurantInfo
@@ -45,16 +47,25 @@ export default function Menu(context) {
       .getRestaurantMenu(restaurantId)
       .then((response) => {
         dispatch(setRestaurantMenu(response.data));
+      }).finally(()=> {
+        dispatch(setLoading(false));
       })
-    }else{
+    }
+
+    return () => {
       dispatch(setRestaurantMenu([]));
-      dispatch(addItemsToShoppingCart([]))
-    }  
+      dispatch(addItemsToShoppingCart([]));
+      dispatch(setLoading(true));
+    }
+      
+    
+     
+      
   },[restaurantId]);
 
 
 
-
+  debugger;
   return (
     <Layout>
       <Head>
@@ -63,12 +74,16 @@ export default function Menu(context) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Loader loading={!restaurantInfo?.nombre}>
-          <RestaurantHeader searchProduct={searchProduct} setSearchProduct={setSearchProduct}/>
-         <RestaurantOpinionsBar />
-        <div className={styles.container}>
-          <Main left={<LeftSidesContainer  productCategory={productCategory} setProductCategory={setProductCategory}/>} /* right={<RightSidesContainer  />} */ center={<RestaurantMainContainer searchProduct={searchProduct} productCategory={productCategory}/>} />
-        </div>
+      <Loader loading={loading}>
+        {restaurantInfo?.nombre && 
+              <>
+                  <RestaurantHeader searchProduct={searchProduct} setSearchProduct={setSearchProduct}/>
+                  <RestaurantOpinionsBar />
+                  <div className={styles.container}>
+                    <Main left={<LeftSidesContainer  productCategory={productCategory} setProductCategory={setProductCategory}/>} /* right={<RightSidesContainer  />} */ center={<RestaurantMainContainer searchProduct={searchProduct} productCategory={productCategory}/>} />
+                  </div>
+              </> 
+        }
       </Loader>
       <Footer />
     </Layout>

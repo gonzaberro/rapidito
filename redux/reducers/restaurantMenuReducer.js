@@ -3,7 +3,8 @@ import { MENU_TYPES } from "../types";
 const initialState = {
     restaurantInfo : {},
     menuProducts : {},
-    topProducts : []
+    topProducts : [],
+    loading:true,
   };
   
   export default function (state = initialState, action) {
@@ -13,8 +14,13 @@ const initialState = {
           ...state,
           restaurantInfo : action.payload.restaurante,
           menuProducts : action.payload.productos,
-          topProducts : action.payload.platos_recomendados
+          topProducts : action.payload.platos_recomendados,
         };
+      case MENU_TYPES.SET_LOADING:
+        return {
+          ...state, 
+          loading: action.payload,
+        }
          
   
       default:

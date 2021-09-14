@@ -49,7 +49,7 @@ export default function ShoppingCart() {
 
 	return (
 		<>
-			<span className={styles.shoppingContainer}>
+			
 				<StyledBadge
 					badgeContent={shoppingCartItems.length}
 					max={9}
@@ -62,7 +62,7 @@ export default function ShoppingCart() {
 						onClick={() => setOpenDrawer(!openDrawer)}
 					/>
 				</StyledBadge>
-			</span>
+			
 
 			<Drawer
 				anchor={"right"}
@@ -89,7 +89,7 @@ export default function ShoppingCart() {
 							return (
 								<MenuCard
 									title={item.nombre}
-									description={item.descripcion || ""}
+									description="Cantidad: 1"
 									src={item.imagen}
 									price={`$${item.precio}`}
 									cardActionButton={menuActionButton(item)}
