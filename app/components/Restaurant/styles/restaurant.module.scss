@@ -36,7 +36,6 @@
 .recomendedMenu{
   display: flex;
   width: 100%;
-  margin-top: 1rem;
   padding-left: 4rem;
   padding-right: 4rem;
 }
@@ -98,6 +97,7 @@
   display: flex; 
   flex:1;
   flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .mainContainer{
@@ -138,6 +138,20 @@
     outline: none;
 }
 
-.sideContainers{
-  box-shadow: rgb(220 212 209 / 80%) 0px 8px 20px;
+
+.menuActionButton{
+
+  background-color: #35b430;
+  color:white;
+  padding: 0.5rem;
+  padding-top: 0.4rem;
+  border-radius: 50px;
+  font-size: 12px;
+  margin-left: 0.7rem;
+  margin-top: 0.3rem;
+  user-select: none;
+
+  &:hover{
+    background-color: #2f992c;
+ }
 }

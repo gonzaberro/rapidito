@@ -16,21 +16,24 @@ export default function RestaurantHeader({ setSearchProduct, searchProduct }) {
 
 	return (
 		<div style={{ position: "relative" }}>
-			
 			<div className={styles.floatingContainer}>
+				<img
+					src={restaurantInfo?.logo}
+					height="120"
+					style={{ float: "right", marginRight: "4rem", marginTop: "0px" }}
+				></img>
 				<span
-					className={
-						isRestaurantOpen() ? styles.deliverTag : styles.closeTag
-					}
+					className={isRestaurantOpen() ? styles.deliverTag : styles.closeTag}
 				>
 					{isRestaurantOpen() ? "Entregando" : "Cerrado"}
 				</span>
 				<h1>{restaurantInfo.nombre}</h1>
 				<h4>{restaurantInfo.descripcion}</h4>
+
 				<input
 					placeholder="Buscar Productos..."
 					className={styles.productSearch}
-					onChange={(e) => setSearchProduct(e.target.value)}
+					onChange={e => setSearchProduct(e.target.value)}
 					value={searchProduct}
 				/>
 			</div>

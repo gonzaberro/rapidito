@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import { arrayOf, shape, string } from 'prop-types';
 import styles from './styles/filter-list.module.scss';
 

@@ -6,6 +6,8 @@ import CreditCard from '../../icons/credit-card';
 import QuestionMark from '../../icons/question-mark';
 import Badge from '../badge';
 
+import { getOpinionesColor } from '../../utils/styleLogic';
+
 const ListItem = ({ description, onClick, payment, score, src, title, type }) => (
   <div className={styles.item} onClick={onClick}>
     <div className={styles.imageContainer}>
@@ -29,7 +31,7 @@ const ListItem = ({ description, onClick, payment, score, src, title, type }) =>
     </div>
     {score && (
       <div className={styles.badgeContainer}>
-        <Badge score={score} />
+        <Badge score={score} color={getOpinionesColor(score)}/>
       </div>
     )}
   </div>
